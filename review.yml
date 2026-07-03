@@ -1,0 +1,83 @@
+aid: usda-snap
+name: USDA SNAP Retailer Locator
+review:
+  question: Does the USDA SNAP API expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. The USDA Food and Nutrition
+    Administration's public SNAP Retailer Locator data is published as an
+    Esri ArcGIS hosted Feature Service - a request/response REST interface
+    over HTTPS (query, with JSON/GeoJSON/PBF encodings). There is no
+    server-push transport (WebSocket or SSE) on this API to model, so no
+    AsyncAPI document applies.
+findings:
+  summary: |
+    USDA FNS/FNA does not publish a bespoke developer API at fns.usda.gov or
+    api.fns.usda.gov for SNAP. Instead, the real, live, public "SNAP
+    Retailer Locator API" is an anonymous, read-only Esri ArcGIS Feature
+    Service - snap_retailer_location_data (ArcGIS item
+    8b260f9a10b0459aa441ad8588c2251c) - hosted at
+    services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer.
+    This exact service is embedded in FNA's own public tool at
+    https://www.fna.usda.gov/snap/retailer-locator (confirmed via a direct
+    link from that page to the matching ArcGIS Hub dataset explorer). As of
+    June 1, 2026 the agency itself was renamed from the Food and Nutrition
+    Service (FNS) to the Food and Nutrition Administration (FNA); both names
+    still appear across USDA properties during the transition. The service
+    was queried live on the review date: a nationwide count query
+    (where=1=1, returnCountOnly=true) returned 254,048 currently authorized
+    SNAP retailer records, and a filtered query (where=State='DC') returned
+    real named retailers (convenience stores, a supermarket, etc.) with
+    street addresses. The layer's only capability is "Query" - it is
+    read-only, pure request/response REST/HTTP, with no realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint
+    documented or observed anywhere in the service metadata.
+  openSource: |
+    Not applicable - this is a government open-data publication, not an
+    open-source software project. The underlying dataset (currently
+    authorized SNAP retailer locations) is public domain U.S. government
+    data, freely queryable with no API key and exportable in bulk
+    (CSV/Shapefile/GeoJSON/KML/Excel) from the ArcGIS Hub item page.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+      documented: true
+      note: Esri ArcGIS Feature Service query interface. Confirmed live and returning real nationwide retailer records on the review date.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the ArcGIS Feature Service metadata or on the FNA retailer locator page.
+sources:
+  - url: https://www.fna.usda.gov/snap/retailer-locator
+    type: Website
+    note: Public retailer locator tool; links directly to the ArcGIS Hub explorer for dataset item 8b260f9a10b0459aa441ad8588c2251c, confirming this is the data source behind the tool. Also carries the FNS->FNA rename notice (effective 2026-06-01).
+  - url: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+    type: APIReference
+    note: "Live service root, queried directly: capabilities='Query', maxRecordCount=1000, layers=[{id:0,name:snap_retailer_location_data}]."
+  - url: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0
+    type: APIReference
+    note: "Live layer metadata, queried directly: geometryType=esriGeometryPoint, supportedQueryFormats=JSON,geoJSON,PBF, and the full field list (Record_ID, Store_Name, Store_Street_Address, Additonal_Address, City, State, Zip_Code, Zip4, County, Store_Type, Latitude, Longitude, Incentive_Program, Grantee_Name, ObjectId)."
+  - url: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query
+    type: APIReference
+    note: "Live query endpoint, queried directly: where=1=1&returnCountOnly=true returned count=254048; where=State='DC' returned real retailer records (e.g. '24 Hours Tobacco & Grocery 1', 3728 Minnesota Ave NE, Washington DC 20019, Convenience Store)."
+  - url: https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c
+    type: Documentation
+    note: ArcGIS Online item page for the dataset, owned by FNS_SNAP_RPMD, titled SNAP_Retailer_Location_data.
+  - url: https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
+    type: Documentation
+    note: ArcGIS Hub dataset landing page (USDA-FNS organization) offering CSV/KML/Zip/GeoJSON/GeoTIFF/PNG download alongside GeoServices/WMS/WFS API links.
+  - url: https://catalog.data.gov/dataset/snap-retail-locator
+    type: Documentation
+    note: data.gov catalog listing for the SNAP Retail Locator, linking to the public-facing tool.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The confirmed public API is a
+    read-only, anonymous, request/response REST interface (Esri ArcGIS
+    Feature Service) with no server-push transport to model in an AsyncAPI
+    document.

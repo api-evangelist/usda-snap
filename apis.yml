@@ -1,0 +1,82 @@
+aid: usda-snap
+url: https://raw.githubusercontent.com/api-evangelist/usda-snap/refs/heads/main/apis.yml
+name: USDA SNAP Retailer Locator
+kind: government
+description: >-
+  The USDA Food and Nutrition Administration (FNA) - renamed from the Food and
+  Nutrition Service (FNS) on June 1, 2026 - publishes an open, public geospatial
+  API for the Supplemental Nutrition Assistance Program (SNAP) Retailer
+  Locator. The data is hosted as an Esri ArcGIS Feature Service
+  (snap_retailer_location_data) rather than a bespoke fns.usda.gov or
+  api.fns.usda.gov endpoint, and is embedded directly in the public retailer
+  locator tool at fna.usda.gov/snap/retailer-locator. It exposes point-in-time
+  location records - name, address, city, state, zip, county, store type,
+  latitude/longitude, and Healthy Incentive Program participation - for every
+  currently authorized SNAP retailer nationwide (roughly a quarter million
+  records as of the review date), queryable anonymously over REST with no API
+  key, in JSON, GeoJSON, or PBF, with CSV/Shapefile/KML export also available
+  through the ArcGIS Hub item page. Data is refreshed on a recurring basis by
+  FNA; the service is read-only (Query only - no write capabilities).
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- SNAP
+- USDA
+- Food and Nutrition Administration
+- FNA
+- FNS
+- Retailer Locator
+- Open Data
+- ArcGIS
+- GIS
+- Government Data
+- Food Assistance
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: usda-snap:usda-snap-retailer-location-data-api
+  name: SNAP Retailer Location Data API
+  tags:
+  - Retailers
+  - Locations
+  - Geospatial
+  - ArcGIS Feature Service
+  - Open Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.fna.usda.gov/snap/retailer-locator
+  baseURL: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+  properties:
+  - url: https://www.fna.usda.gov/snap/retailer-locator
+    type: Website
+  - url: https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+    type: Documentation
+  - url: https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c
+    type: APIReference
+  - url: https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
+    type: Documentation
+  - url: openapi/usda-snap-openapi.yml
+    type: OpenAPI
+  description: >-
+    Public, anonymous, read-only Esri ArcGIS Feature Service exposing location
+    records for every currently authorized SNAP retailer nationwide - store
+    name, street address, city, state, zip/zip4, county, store type (e.g.
+    Convenience Store, Grocery Store, Supermarket, Super Store, Farmers and
+    Markets, Restaurant Meals Program, Specialty Store, Other), latitude and
+    longitude, and Healthy Incentive Program / grantee participation.
+    Supports SQL-style `where` filtering, field selection, spatial queries,
+    sorting, distinct values, statistics, and offset-based pagination
+    (maxRecordCount 1,000 rows per request) in JSON, GeoJSON, or PBF. This is
+    the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c)
+    embedded in FNA's own public retailer locator web tool.
+common:
+- type: Website
+  url: https://www.fna.usda.gov/snap/retailer-locator
+- type: Documentation
+  url: https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- type: RateLimits
+  url: rate-limits/usda-snap-rate-limits.yml
+- type: Review
+  url: review.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

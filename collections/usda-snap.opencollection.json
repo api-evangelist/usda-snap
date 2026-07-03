@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USDA SNAP Retailer Location Data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get feature service metadata.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer",
+            "params": [
+              { "name": "f", "value": "json", "type": "query", "description": "Response format." }
+            ]
+          },
+          "docs": "Returns service-level metadata, including the single published layer (id 0, snap_retailer_location_data)."
+        },
+        {
+          "info": { "name": "Get layer metadata.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0",
+            "params": [
+              { "name": "f", "value": "json", "type": "query", "description": "Response format." }
+            ]
+          },
+          "docs": "Returns field definitions, geometry type, capabilities (Query only), and maxRecordCount (1000) for the SNAP retailer location layer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Retailers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get nationwide retailer count.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              { "name": "where", "value": "1=1", "type": "query" },
+              { "name": "returnCountOnly", "value": "true", "type": "query" },
+              { "name": "f", "value": "json", "type": "query" }
+            ]
+          },
+          "docs": "Returns the total count of currently authorized SNAP retailer records (254,048 confirmed live on the review date)."
+        },
+        {
+          "info": { "name": "Query retailers by state.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              { "name": "where", "value": "State='DC'", "type": "query" },
+              { "name": "outFields", "value": "Store_Name,Store_Street_Address,City,State,Zip_Code,Store_Type", "type": "query" },
+              { "name": "resultRecordCount", "value": "10", "type": "query" },
+              { "name": "f", "value": "json", "type": "query" }
+            ]
+          },
+          "docs": "Queries authorized SNAP retailers in a given state (District of Columbia in this example)."
+        },
+        {
+          "info": { "name": "Query retailers by store type.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              { "name": "where", "value": "Store_Type='Supermarket'", "type": "query" },
+              { "name": "outFields", "value": "Store_Name,City,State,Store_Type", "type": "query" },
+              { "name": "resultRecordCount", "value": "10", "type": "query" },
+              { "name": "f", "value": "json", "type": "query" }
+            ]
+          },
+          "docs": "Queries authorized SNAP retailers by store type, e.g. Convenience Store, Grocery Store, Supermarket, Super Store, Specialty Store, Farmers and Markets, Restaurant Meals Program, Other."
+        },
+        {
+          "info": { "name": "Paginate through all retailers.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              { "name": "where", "value": "1=1", "type": "query" },
+              { "name": "outFields", "value": "*", "type": "query" },
+              { "name": "resultOffset", "value": "0", "type": "query" },
+              { "name": "resultRecordCount", "value": "1000", "type": "query" },
+              { "name": "f", "value": "json", "type": "query" }
+            ]
+          },
+          "docs": "Walks the full ~254,048-record nationwide dataset using resultOffset/resultRecordCount pagination (maxRecordCount is 1000 per page)."
+        },
+        {
+          "info": { "name": "Query retailers within a radius of a point.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              { "name": "geometry", "value": "-77.0369,38.9072", "type": "query" },
+              { "name": "geometryType", "value": "esriGeometryPoint", "type": "query" },
+              { "name": "inSR", "value": "4326", "type": "query" },
+              { "name": "distance", "value": "5", "type": "query" },
+              { "name": "units", "value": "esriSRUnit_StatuteMile", "type": "query" },
+              { "name": "spatialRel", "value": "esriSpatialRelIntersects", "type": "query" },
+              { "name": "outFields", "value": "Store_Name,Store_Street_Address,City,State", "type": "query" },
+              { "name": "f", "value": "json", "type": "query" }
+            ]
+          },
+          "docs": "Locates authorized SNAP retailers within a radius of a point (Washington, DC coordinates in this example) - the core 'find retailers near me' pattern behind the public locator tool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

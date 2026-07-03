@@ -1,0 +1,66 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: USDA Food and Nutrition Administration
+providerId: usda-snap
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- SNAP
+- USDA
+- Government Data
+- ArcGIS
+- Rate Limiting
+- Quotas
+description: >-
+  The SNAP Retailer Location Data API is a free, anonymous, read-only Esri
+  ArcGIS hosted Feature Service. USDA FNA does not publish a documented
+  numeric per-account or per-IP request-rate limit for this service - no API
+  key, quota, or tiering is required or offered. The only confirmed,
+  documented ceiling is Esri's per-request `maxRecordCount` of 1,000 records,
+  which callers work around with `resultOffset`/`resultRecordCount`
+  pagination across the ~254,048 nationwide retailer records (count
+  confirmed live via `returnCountOnly=true` on the review date). As a shared
+  ArcGIS Online-hosted service, USDA's own platform capacity (and standard
+  Esri/Cloudflare-level abuse protections) could still throttle or block
+  clients that issue an unreasonably high request volume, but no published
+  threshold exists for that behavior.
+notes: >-
+  Treat this as a courtesy-use public dataset: page responsibly with
+  resultOffset/resultRecordCount, cache results locally, and prefer bulk
+  export (CSV/Shapefile/GeoJSON/KML from the ArcGIS Hub item page) over
+  high-frequency polling for full-refresh use cases.
+sources:
+- https://www.fna.usda.gov/snap/retailer-locator
+- https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+- https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
+- https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+responseCodes:
+  throttled: not published
+limits:
+- name: Per-Request Record Limit
+  scope: request
+  metric: records
+  limit: '1000'
+  notes: Confirmed live maxRecordCount on the snap_retailer_location_data layer; page with resultOffset/resultRecordCount to retrieve more.
+- name: API Key / Authentication
+  scope: account
+  metric: requests
+  limit: not required
+  notes: The service is queried anonymously; no API key, token, or registration is needed.
+- name: Request Rate
+  scope: client
+  metric: requests per minute
+  limit: not published
+  notes: No documented numeric request-rate ceiling; standard ArcGIS Online platform capacity applies.
+policies:
+- name: Pagination
+  description: Use resultOffset and resultRecordCount (max 1,000 per page) to walk the full ~254,048-record nationwide dataset.
+- name: Bulk Export Preference
+  description: For full-dataset refreshes, use the ArcGIS Hub item's CSV/Shapefile/GeoJSON/KML export rather than repeated paginated queries.
+- name: Read-Only
+  description: The layer's only capability is Query - no create, update, or delete operations are exposed publicly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
