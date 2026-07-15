@@ -69,6 +69,8 @@ apis:
     the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c)
     embedded in FNA's own public retailer locator web tool.
 common:
+- type: AgenticAccess
+  url: agentic-access/usda-snap-agentic-access.yml
 - type: DomainSecurity
   url: security/usda-snap-domain-security.yml
 - type: Website
