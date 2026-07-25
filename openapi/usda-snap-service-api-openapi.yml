@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: SNAP Retailer Location Data Retailers Service API
+  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.
+  version: '1.0'
+  contact:
+    name: USDA Food and Nutrition Administration
+    url: https://www.fna.usda.gov/snap/retailer-locator
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+  description: USDA FNA hosted ArcGIS Feature Service (production)
+tags:
+- name: Service
+  description: Feature service and layer metadata.
+paths:
+  /:
+    get:
+      operationId: getServiceMetadata
+      tags:
+      - Service
+      summary: Get feature service metadata
+      description: Returns service-level metadata, including the list of layers (this service publishes a single layer, id 0, "snap_retailer_location_data").
+      parameters:
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Feature service metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceMetadata'
+  /0:
+    get:
+      operationId: getLayerMetadata
+      tags:
+      - Service
+      summary: Get layer metadata
+      description: Returns layer-level metadata for the SNAP retailer location layer - field definitions, geometry type (esriGeometryPoint), capabilities (Query only), maxRecordCount (1,000), and supported query formats (JSON, GeoJSON, PBF).
+      parameters:
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Layer metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerMetadata'
+components:
+  schemas:
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        alias:
+          type: string
+    ServiceMetadata:
+      type: object
+      properties:
+        currentVersion:
+          type: number
+        layers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        capabilities:
+          type: string
+          example: Query
+        maxRecordCount:
+          type: integer
+          example: 1000
+        supportedQueryFormats:
+          type: string
+          example: JSON
+    LayerMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          example: snap_retailer_location_data
+        geometryType:
+          type: string
+          example: esriGeometryPoint
+        capabilities:
+          type: string
+          example: Query
+        maxRecordCount:
+          type: integer
+          example: 1000
+        supportedQueryFormats:
+          type: string
+          example: JSON, geoJSON, PBF
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+  parameters:
+    Format:
+      name: f
+      in: query
+      required: false
+      description: Response format.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        default: json

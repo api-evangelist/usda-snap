@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: SNAP Retailer Location Data Retailers API
+  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.
+  version: '1.0'
+  contact:
+    name: USDA Food and Nutrition Administration
+    url: https://www.fna.usda.gov/snap/retailer-locator
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+  description: USDA FNA hosted ArcGIS Feature Service (production)
+tags:
+- name: Retailers
+  description: Query SNAP retailer location records.
+paths:
+  /0/query:
+    get:
+      operationId: queryRetailers
+      tags:
+      - Retailers
+      summary: Query SNAP retailer locations
+      description: 'Queries the SNAP retailer location layer with an optional SQL-style WHERE clause, field selection, spatial filter, sorting, distinct values, and offset-based pagination. Confirmed live: a nationwide count query (where=1=1, returnCountOnly=true) returned 254,048 authorized retailer records as of the review date; a filtered query (where=State=''DC'') returned real convenience store, grocery, and supermarket records with names and street addresses.'
+      parameters:
+      - name: where
+        in: query
+        required: false
+        description: SQL-92 WHERE clause evaluated against the layer's fields, e.g. State='CA', Store_Type='Supermarket', or 1=1 to match all records.
+        schema:
+          type: string
+          default: 1=1
+      - name: outFields
+        in: query
+        required: false
+        description: Comma-separated list of fields to return, or * for all fields.
+        schema:
+          type: string
+          default: '*'
+      - name: geometry
+        in: query
+        required: false
+        description: Geometry (e.g. an envelope or point) to spatially filter results, used together with geometryType and spatialRel.
+        schema:
+          type: string
+      - name: geometryType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - esriGeometryPoint
+          - esriGeometryEnvelope
+          - esriGeometryPolygon
+      - name: spatialRel
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - esriSpatialRelIntersects
+          - esriSpatialRelContains
+          - esriSpatialRelWithin
+      - name: distance
+        in: query
+        required: false
+        description: Buffer distance for a proximity/radius search around a point geometry.
+        schema:
+          type: number
+      - name: units
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - esriSRUnit_Meter
+          - esriSRUnit_StatuteMile
+          - esriSRUnit_Kilometer
+      - name: orderByFields
+        in: query
+        required: false
+        description: Comma-separated fields to sort by, e.g. "State ASC, City ASC".
+        schema:
+          type: string
+      - name: returnDistinctValues
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: returnCountOnly
+        in: query
+        required: false
+        description: If true, returns only the count of matching records instead of the records themselves.
+        schema:
+          type: boolean
+          default: false
+      - name: resultOffset
+        in: query
+        required: false
+        description: Number of matching records to skip, for pagination.
+        schema:
+          type: integer
+      - name: resultRecordCount
+        in: query
+        required: false
+        description: Maximum number of records to return. The service enforces a maxRecordCount of 1,000 per request.
+        schema:
+          type: integer
+          maximum: 1000
+      - name: outSR
+        in: query
+        required: false
+        description: Output spatial reference well-known ID. Native service SR is 102100/3857 (Web Mercator); 4326 returns WGS84 lat/lon geometry.
+        schema:
+          type: integer
+          default: 102100
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Matching retailer records (or a count, if returnCountOnly=true).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+components:
+  schemas:
+    QueryResponse:
+      type: object
+      properties:
+        objectIdFieldName:
+          type: string
+          example: ObjectId
+        geometryType:
+          type: string
+          example: esriGeometryPoint
+        spatialReference:
+          type: object
+          properties:
+            wkid:
+              type: integer
+              example: 102100
+        exceededTransferLimit:
+          type: boolean
+          description: True when more records match than were returned; page further with resultOffset.
+        count:
+          type: integer
+          description: Present only when returnCountOnly=true.
+          example: 254048
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryResponseFeature'
+    QueryResponseFeature:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Retailer'
+        geometry:
+          type: object
+          properties:
+            x:
+              type: number
+              description: X coordinate in the response spatial reference (Web Mercator by default).
+            y:
+              type: number
+              description: Y coordinate in the response spatial reference (Web Mercator by default).
+    Retailer:
+      type: object
+      description: One authorized SNAP retailer location record.
+      properties:
+        Record_ID:
+          type: integer
+        Store_Name:
+          type: string
+          example: Dannys Market
+        Store_Street_Address:
+          type: string
+          example: 33 Park St
+        Additonal_Address:
+          type: string
+          nullable: true
+          description: Suite/unit line, as published by the source dataset (field name misspelling is upstream-original).
+        City:
+          type: string
+          example: Hartford
+        State:
+          type: string
+          example: CT
+        Zip_Code:
+          type: string
+          example: '06106'
+        Zip4:
+          type: string
+          nullable: true
+          example: '2520'
+        County:
+          type: string
+          example: CAPITOL
+        Store_Type:
+          type: string
+          enum:
+          - Convenience Store
+          - Grocery Store
+          - Supermarket
+          - Super Store
+          - Specialty Store
+          - Farmers and Markets
+          - Restaurant Meals Program
+          - Other
+        Latitude:
+          type: number
+          format: double
+          example: 41.757061
+        Longitude:
+          type: number
+          format: double
+          example: -72.676529
+        Incentive_Program:
+          type: string
+          nullable: true
+          description: Healthy Incentive Program participation, where populated.
+        Grantee_Name:
+          type: string
+          nullable: true
+        ObjectId:
+          type: integer
+  parameters:
+    Format:
+      name: f
+      in: query
+      required: false
+      description: Response format.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        default: json
