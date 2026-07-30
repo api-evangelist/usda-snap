@@ -17,7 +17,18 @@ description: >-
   key, in JSON, GeoJSON, or PBF, with CSV/Shapefile/KML export also available
   through the ArcGIS Hub item page. Data is refreshed on a recurring basis by
   FNA; the service is read-only (Query only - no write capabilities).
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/usda-snap.png
 tags:
 - SNAP
 - USDA
@@ -34,40 +45,48 @@ created: '2026-07-03'
 modified: '2026-07-03'
 specificationVersion: '0.19'
 apis:
-- aid: usda-snap:usda-snap-retailer-location-data-api
-  name: SNAP Retailer Location Data API
+- aid: usda-snap:usda-snap-retailers-api
+  name: USDA SNAP Retailer Locator Retailers API
+  description: Query SNAP retailer location records.
+  humanURL: https://www.fna.usda.gov/snap/retailer-locator
+  baseURL: >-
+    https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
   tags:
   - Retailers
-  - Locations
-  - Geospatial
-  - ArcGIS Feature Service
-  - Open Data
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fna.usda.gov/snap/retailer-locator
-  baseURL: https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
   properties:
-  - url: https://www.fna.usda.gov/snap/retailer-locator
-    type: Website
-  - url: https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
-    type: Documentation
-  - url: https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c
-    type: APIReference
-  - url: https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
-    type: Documentation
-  - url: openapi/usda-snap-openapi.yml
-    type: OpenAPI
-  description: >-
-    Public, anonymous, read-only Esri ArcGIS Feature Service exposing location
-    records for every currently authorized SNAP retailer nationwide - store
-    name, street address, city, state, zip/zip4, county, store type (e.g.
-    Convenience Store, Grocery Store, Supermarket, Super Store, Farmers and
-    Markets, Restaurant Meals Program, Specialty Store, Other), latitude and
-    longitude, and Healthy Incentive Program / grantee participation.
-    Supports SQL-style `where` filtering, field selection, spatial queries,
-    sorting, distinct values, statistics, and offset-based pagination
-    (maxRecordCount 1,000 rows per request) in JSON, GeoJSON, or PBF. This is
-    the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c)
-    embedded in FNA's own public retailer locator web tool.
+  - type: OpenAPI
+    url: openapi/usda-snap-retailers-api-openapi.yml
+  - type: Website
+    url: https://www.fna.usda.gov/snap/retailer-locator
+  - type: Documentation
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+  - type: APIReference
+    url: https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c
+  - type: Documentation
+    url: >-
+      https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
+- aid: usda-snap:usda-snap-service-api
+  name: USDA SNAP Retailer Locator Service API
+  description: Feature service and layer metadata.
+  humanURL: https://www.fna.usda.gov/snap/retailer-locator
+  baseURL: >-
+    https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
+  tags:
+  - Service
+  properties:
+  - type: OpenAPI
+    url: openapi/usda-snap-service-api-openapi.yml
+  - type: Website
+    url: https://www.fna.usda.gov/snap/retailer-locator
+  - type: Documentation
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+  - type: APIReference
+    url: https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c
+  - type: Documentation
+    url: >-
+      https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/
 common:
 - type: AgenticAccess
   url: agentic-access/usda-snap-agentic-access.yml
