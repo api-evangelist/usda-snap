@@ -1,0 +1,16 @@
+{
+  "provider": "usda-snap",
+  "sources": [
+    "usda-snap-retailers-api-openapi.yml",
+    "usda-snap-service-api-openapi.yml"
+  ],
+  "outputs": [
+    "usda-snap-retailers-api-openapi.yml",
+    "usda-snap-service-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
