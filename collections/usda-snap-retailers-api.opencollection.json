@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SNAP Retailer Location Data Retailers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retailers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query SNAP retailer locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0/query",
+            "params": [
+              {
+                "name": "where",
+                "value": "",
+                "type": "query",
+                "description": "SQL-92 WHERE clause evaluated against the layer's fields, e.g. State='CA', Store_Type='Supermarket', or 1=1 to match all records."
+              },
+              {
+                "name": "outFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return, or * for all fields."
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry (e.g. an envelope or point) to spatially filter results, used together with geometryType and spatialRel."
+              },
+              {
+                "name": "geometryType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "spatialRel",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "Buffer distance for a proximity/radius search around a point geometry."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderByFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated fields to sort by, e.g. \"State ASC, City ASC\"."
+              },
+              {
+                "name": "returnDistinctValues",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "returnCountOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns only the count of matching records instead of the records themselves."
+              },
+              {
+                "name": "resultOffset",
+                "value": "",
+                "type": "query",
+                "description": "Number of matching records to skip, for pagination."
+              },
+              {
+                "name": "resultRecordCount",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return. The service enforces a maxRecordCount of 1,000 per request."
+              },
+              {
+                "name": "outSR",
+                "value": "",
+                "type": "query",
+                "description": "Output spatial reference well-known ID. Native service SR is 102100/3857 (Web Mercator); 4326 returns WGS84 lat/lon geometry."
+              },
+              {
+                "name": "f",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Queries the SNAP retailer location layer with an optional SQL-style WHERE clause, field selection, spatial filter, sorting, distinct values, and offset-based pagination. Confirmed live: a nationwide count query (where=1=1, returnCountOnly=true) returned 254,048 authorized retailer records as of the review date; a filtered query (where=State='DC') returned real convenience store, grocery, and supermarket records with names and street addresses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

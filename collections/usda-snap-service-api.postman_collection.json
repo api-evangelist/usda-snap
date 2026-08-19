@@ -1,0 +1,196 @@
+{
+  "item": [
+    {
+      "id": "43a73295-0e55-40cd-a68c-1457df1b8754",
+      "name": "Service",
+      "description": {
+        "content": "Feature service and layer metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "085e2b4b-fe0a-439a-a9f7-50958cd54266",
+          "name": "Get feature service metadata",
+          "request": {
+            "name": "Get feature service metadata",
+            "description": {
+              "content": "Returns service-level metadata, including the list of layers (this service publishes a single layer, id 0, \"snap_retailer_location_data\").",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "f",
+                  "value": "json",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80144402-41da-4efd-a94c-62651d32bec5",
+              "name": "Feature service metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "f",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentVersion\": 542.3659050837981,\n  \"layers\": [\n    {\n      \"id\": 6002,\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 3122,\n      \"name\": \"string\"\n    }\n  ],\n  \"capabilities\": \"Query\",\n  \"maxRecordCount\": 1000,\n  \"supportedQueryFormats\": \"JSON\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f691653e-87c4-4cd3-b762-ba5bc36b0ba6",
+          "name": "Get layer metadata",
+          "request": {
+            "name": "Get layer metadata",
+            "description": {
+              "content": "Returns layer-level metadata for the SNAP retailer location layer - field definitions, geometry type (esriGeometryPoint), capabilities (Query only), maxRecordCount (1,000), and supported query formats (JSON, GeoJSON, PBF).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "0"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "f",
+                  "value": "json",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35ccf7b5-6059-4cc0-8697-77f97e8f5562",
+              "name": "Layer metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "f",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"snap_retailer_location_data\",\n  \"geometryType\": \"esriGeometryPoint\",\n  \"capabilities\": \"Query\",\n  \"maxRecordCount\": 1000,\n  \"supportedQueryFormats\": \"JSON, geoJSON, PBF\",\n  \"fields\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"alias\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"alias\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "34586148-31e7-4445-a447-b48bccf76d0a",
+    "name": "SNAP Retailer Location Data Retailers Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.\n\nContact Support:\n Name: USDA Food and Nutrition Administration",
+      "type": "text/plain"
+    }
+  }
+}

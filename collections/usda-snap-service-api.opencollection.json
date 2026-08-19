@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SNAP Retailer Location Data Retailers Service API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get feature service metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/",
+            "params": [
+              {
+                "name": "f",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Returns service-level metadata, including the list of layers (this service publishes a single layer, id 0, \"snap_retailer_location_data\")."
+        },
+        {
+          "info": {
+            "name": "Get layer metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0",
+            "params": [
+              {
+                "name": "f",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              }
+            ]
+          },
+          "docs": "Returns layer-level metadata for the SNAP retailer location layer - field definitions, geometry type (esriGeometryPoint), capabilities (Query only), maxRecordCount (1,000), and supported query formats (JSON, GeoJSON, PBF)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

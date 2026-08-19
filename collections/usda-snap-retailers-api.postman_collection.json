@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "9caf8ee9-b558-4b84-a071-5f05cb834c55",
+      "name": "Retailers",
+      "description": {
+        "content": "Query SNAP retailer location records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9b868dc-f56b-47ee-8612-3bd161d0cb31",
+          "name": "Query SNAP retailer locations",
+          "request": {
+            "name": "Query SNAP retailer locations",
+            "description": {
+              "content": "Queries the SNAP retailer location layer with an optional SQL-style WHERE clause, field selection, spatial filter, sorting, distinct values, and offset-based pagination. Confirmed live: a nationwide count query (where=1=1, returnCountOnly=true) returned 254,048 authorized retailer records as of the review date; a filtered query (where=State='DC') returned real convenience store, grocery, and supermarket records with names and street addresses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "0",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "where",
+                  "value": "1=1",
+                  "description": "SQL-92 WHERE clause evaluated against the layer's fields, e.g. State='CA', Store_Type='Supermarket', or 1=1 to match all records."
+                },
+                {
+                  "disabled": false,
+                  "key": "outFields",
+                  "value": "*",
+                  "description": "Comma-separated list of fields to return, or * for all fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "geometry",
+                  "value": "<string>",
+                  "description": "Geometry (e.g. an envelope or point) to spatially filter results, used together with geometryType and spatialRel."
+                },
+                {
+                  "disabled": false,
+                  "key": "geometryType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "spatialRel",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<number>",
+                  "description": "Buffer distance for a proximity/radius search around a point geometry."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderByFields",
+                  "value": "<string>",
+                  "description": "Comma-separated fields to sort by, e.g. \"State ASC, City ASC\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnDistinctValues",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "returnCountOnly",
+                  "value": "false",
+                  "description": "If true, returns only the count of matching records instead of the records themselves."
+                },
+                {
+                  "disabled": false,
+                  "key": "resultOffset",
+                  "value": "<integer>",
+                  "description": "Number of matching records to skip, for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "resultRecordCount",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return. The service enforces a maxRecordCount of 1,000 per request."
+                },
+                {
+                  "disabled": false,
+                  "key": "outSR",
+                  "value": "102100",
+                  "description": "Output spatial reference well-known ID. Native service SR is 102100/3857 (Web Mercator); 4326 returns WGS84 lat/lon geometry."
+                },
+                {
+                  "disabled": false,
+                  "key": "f",
+                  "value": "json",
+                  "description": "Response format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69f9fc7a-3608-4957-9940-35d80b104b88",
+              "name": "Matching retailer records (or a count, if returnCountOnly=true).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "0",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "where",
+                      "value": "1=1"
+                    },
+                    {
+                      "key": "outFields",
+                      "value": "*"
+                    },
+                    {
+                      "key": "geometry",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geometryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spatialRel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderByFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnDistinctValues",
+                      "value": "false"
+                    },
+                    {
+                      "key": "returnCountOnly",
+                      "value": "false"
+                    },
+                    {
+                      "key": "resultOffset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "resultRecordCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "outSR",
+                      "value": "102100"
+                    },
+                    {
+                      "key": "f",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objectIdFieldName\": \"ObjectId\",\n  \"geometryType\": \"esriGeometryPoint\",\n  \"spatialReference\": {\n    \"wkid\": 102100\n  },\n  \"exceededTransferLimit\": false,\n  \"count\": 254048,\n  \"features\": [\n    {\n      \"attributes\": {\n        \"Record_ID\": 5105,\n        \"Store_Name\": \"Dannys Market\",\n        \"Store_Street_Address\": \"33 Park St\",\n        \"Additonal_Address\": \"string\",\n        \"City\": \"Hartford\",\n        \"State\": \"CT\",\n        \"Zip_Code\": \"06106\",\n        \"Zip4\": \"2520\",\n        \"County\": \"CAPITOL\",\n        \"Store_Type\": \"Restaurant Meals Program\",\n        \"Latitude\": 41.757061,\n        \"Longitude\": -72.676529,\n        \"Incentive_Program\": \"string\",\n        \"Grantee_Name\": \"string\",\n        \"ObjectId\": 7831\n      },\n      \"geometry\": {\n        \"x\": 4053.6989135665626,\n        \"y\": 4126.350455668695\n      }\n    },\n    {\n      \"attributes\": {\n        \"Record_ID\": 6818,\n        \"Store_Name\": \"Dannys Market\",\n        \"Store_Street_Address\": \"33 Park St\",\n        \"Additonal_Address\": \"string\",\n        \"City\": \"Hartford\",\n        \"State\": \"CT\",\n        \"Zip_Code\": \"06106\",\n        \"Zip4\": \"2520\",\n        \"County\": \"CAPITOL\",\n        \"Store_Type\": \"Supermarket\",\n        \"Latitude\": 41.757061,\n        \"Longitude\": -72.676529,\n        \"Incentive_Program\": \"string\",\n        \"Grantee_Name\": \"string\",\n        \"ObjectId\": 4790\n      },\n      \"geometry\": {\n        \"x\": 8158.105250784488,\n        \"y\": 9824.363148571629\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9f2d044-8f35-458c-97f9-70be308a6d10",
+    "name": "SNAP Retailer Location Data Retailers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.\n\nContact Support:\n Name: USDA Food and Nutrition Administration",
+      "type": "text/plain"
+    }
+  }
+}
