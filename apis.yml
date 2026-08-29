@@ -17,6 +17,17 @@ description: >-
   key, in JSON, GeoJSON, or PBF, with CSV/Shapefile/KML export also available
   through the ArcGIS Hub item page. Data is refreshed on a recurring basis by
   FNA; the service is read-only (Query only - no write capabilities).
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: open
