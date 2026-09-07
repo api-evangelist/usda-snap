@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: SNAP Retailer Location Data Retailers Service API
   description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.
@@ -50,6 +50,28 @@ paths:
                 $ref: '#/components/schemas/LayerMetadata'
 components:
   schemas:
+    LayerMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          example: snap_retailer_location_data
+        geometryType:
+          type: string
+          example: esriGeometryPoint
+        capabilities:
+          type: string
+          example: Query
+        maxRecordCount:
+          type: integer
+          example: 1000
+        supportedQueryFormats:
+          type: string
+          example: JSON, geoJSON, PBF
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
     FieldDefinition:
       type: object
       properties:
@@ -82,28 +104,6 @@ components:
         supportedQueryFormats:
           type: string
           example: JSON
-    LayerMetadata:
-      type: object
-      properties:
-        name:
-          type: string
-          example: snap_retailer_location_data
-        geometryType:
-          type: string
-          example: esriGeometryPoint
-        capabilities:
-          type: string
-          example: Query
-        maxRecordCount:
-          type: integer
-          example: 1000
-        supportedQueryFormats:
-          type: string
-          example: JSON, geoJSON, PBF
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
   parameters:
     Format:
       name: f
