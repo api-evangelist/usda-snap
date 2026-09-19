@@ -84,6 +84,8 @@ apis:
   baseURL: >-
     https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer
   tags:
+  - Services
+  tags_raw:
   - Service
   properties:
   - type: OpenAPI
