@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: SNAP Retailer Location Data Retailers Service API
-  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.
+  title: SNAP Retailer Location Data Service API
+  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide.
   version: '1.0'
   contact:
     name: USDA Food and Nutrition Administration
@@ -50,6 +50,15 @@ paths:
                 $ref: '#/components/schemas/LayerMetadata'
 components:
   schemas:
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        alias:
+          type: string
     LayerMetadata:
       type: object
       properties:
@@ -72,15 +81,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldDefinition'
-    FieldDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        alias:
-          type: string
     ServiceMetadata:
       type: object
       properties:

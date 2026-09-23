@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: SNAP Retailer Location Data Retailers API
-  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide. The service is anonymous and read-only (Query capability only - no create/update/delete). It is the same live data source (ArcGIS item 8b260f9a10b0459aa441ad8588c2251c) embedded in the public retailer locator at https://www.fna.usda.gov/snap/retailer-locator. All endpoints, query parameters, and the field list below were confirmed live against the production service on the review date; no API key is required.
+  description: Esri ArcGIS Feature Service published by the USDA Food and Nutrition Administration (FNA, formerly FNS) exposing location records for every currently authorized SNAP retailer nationwide.
   version: '1.0'
   contact:
     name: USDA Food and Nutrition Administration
@@ -125,21 +125,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/QueryResponse'
 components:
+  parameters:
+    Format:
+      name: f
+      in: query
+      required: false
+      description: Response format.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        default: json
   schemas:
-    QueryResponseFeature:
-      type: object
-      properties:
-        attributes:
-          $ref: '#/components/schemas/Retailer'
-        geometry:
-          type: object
-          properties:
-            x:
-              type: number
-              description: X coordinate in the response spatial reference (Web Mercator by default).
-            y:
-              type: number
-              description: Y coordinate in the response spatial reference (Web Mercator by default).
     QueryResponse:
       type: object
       properties:
@@ -166,6 +165,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QueryResponseFeature'
+    QueryResponseFeature:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Retailer'
+        geometry:
+          type: object
+          properties:
+            x:
+              type: number
+              description: X coordinate in the response spatial reference (Web Mercator by default).
+            y:
+              type: number
+              description: Y coordinate in the response spatial reference (Web Mercator by default).
     Retailer:
       type: object
       description: One authorized SNAP retailer location record.
@@ -230,16 +243,3 @@ components:
           - 'null'
         ObjectId:
           type: integer
-  parameters:
-    Format:
-      name: f
-      in: query
-      required: false
-      description: Response format.
-      schema:
-        type: string
-        enum:
-        - json
-        - geojson
-        - pbf
-        default: json

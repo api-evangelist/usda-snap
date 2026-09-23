@@ -1,8 +1,7 @@
 {
   "provider": "usda-snap",
   "sources": [
-    "usda-snap-retailers-api-openapi.yml",
-    "usda-snap-service-api-openapi.yml"
+    "_original/usda-snap-openapi.yml"
   ],
   "outputs": [
     "usda-snap-retailers-api-openapi.yml",
@@ -12,9 +11,12 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "usda-snap-retailers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "usda-snap-service-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "usda-snap-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "usda-snap-retailers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "usda-snap-service-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
