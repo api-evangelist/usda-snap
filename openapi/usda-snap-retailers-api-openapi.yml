@@ -139,46 +139,6 @@ components:
         - pbf
         default: json
   schemas:
-    QueryResponse:
-      type: object
-      properties:
-        objectIdFieldName:
-          type: string
-          example: ObjectId
-        geometryType:
-          type: string
-          example: esriGeometryPoint
-        spatialReference:
-          type: object
-          properties:
-            wkid:
-              type: integer
-              example: 102100
-        exceededTransferLimit:
-          type: boolean
-          description: True when more records match than were returned; page further with resultOffset.
-        count:
-          type: integer
-          description: Present only when returnCountOnly=true.
-          example: 254048
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryResponseFeature'
-    QueryResponseFeature:
-      type: object
-      properties:
-        attributes:
-          $ref: '#/components/schemas/Retailer'
-        geometry:
-          type: object
-          properties:
-            x:
-              type: number
-              description: X coordinate in the response spatial reference (Web Mercator by default).
-            y:
-              type: number
-              description: Y coordinate in the response spatial reference (Web Mercator by default).
     Retailer:
       type: object
       description: One authorized SNAP retailer location record.
@@ -243,3 +203,43 @@ components:
           - 'null'
         ObjectId:
           type: integer
+    QueryResponseFeature:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Retailer'
+        geometry:
+          type: object
+          properties:
+            x:
+              type: number
+              description: X coordinate in the response spatial reference (Web Mercator by default).
+            y:
+              type: number
+              description: Y coordinate in the response spatial reference (Web Mercator by default).
+    QueryResponse:
+      type: object
+      properties:
+        objectIdFieldName:
+          type: string
+          example: ObjectId
+        geometryType:
+          type: string
+          example: esriGeometryPoint
+        spatialReference:
+          type: object
+          properties:
+            wkid:
+              type: integer
+              example: 102100
+        exceededTransferLimit:
+          type: boolean
+          description: True when more records match than were returned; page further with resultOffset.
+        count:
+          type: integer
+          description: Present only when returnCountOnly=true.
+          example: 254048
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryResponseFeature'
