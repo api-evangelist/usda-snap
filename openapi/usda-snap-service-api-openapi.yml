@@ -63,6 +63,15 @@ components:
         - pbf
         default: json
   schemas:
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        alias:
+          type: string
     ServiceMetadata:
       type: object
       properties:
@@ -108,12 +117,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldDefinition'
-    FieldDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        alias:
-          type: string
