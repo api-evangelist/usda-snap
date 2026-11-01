@@ -1,4 +1,4 @@
-# USDA SNAP Retailer Locator (usda-snap)
+# USDA SNAP Retailer Locator
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,68 +64,105 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The USDA Food and Nutrition Administration (FNA) - renamed from the Food and Nutrition Service (FNS) on June 1, 2026 - publishes an open, public geospatial API for the Supplemental Nutrition Assistance Program (SNAP) Retailer Locator. The data is hosted as an Esri ArcGIS Feature Service (`snap_retailer_location_data`) rather than a bespoke `fns.usda.gov` or `api.fns.usda.gov` endpoint, and is embedded directly in the public retailer locator tool at [fna.usda.gov/snap/retailer-locator](https://www.fna.usda.gov/snap/retailer-locator). It exposes point-in-time location records - name, address, city, state, zip, county, store type, latitude/longitude, and Healthy Incentive Program participation - for every currently authorized SNAP retailer nationwide (254,048 records confirmed live on the review date), queryable anonymously over REST with no API key, in JSON, GeoJSON, or PBF, with CSV/Shapefile/KML export also available through the ArcGIS Hub item page. The service is read-only (Query only - no write capabilities).
+The USDA Food and Nutrition Administration (FNA) - renamed from the Food and Nutrition Service (FNS) on June 1, 2026 - publishes an open, public geospatial API for the Supplemental Nutrition Assistance Program (SNAP) Retailer Locator. The data is hosted as an Esri ArcGIS Feature Service (snap_retailer_location_data) rather than a bespoke fns.usda.gov or api.fns.usda.gov endpoint, and is embedded directly in the public retailer locator tool at fna.usda.gov/snap/retailer-locator. It exposes point-in-time location records - name, address, city, state, zip, county, store type, latitude/longitude, and Healthy Incentive Program participation - for every currently authorized SNAP retailer nationwide (roughly a quarter million records as of the review date), queryable anonymously over REST with no API key, in JSON, GeoJSON, or PBF, with CSV/Shapefile/KML export also available through the ArcGIS Hub item page. Data is refreshed on a recurring basis by FNA; the service is read-only (Query only - no write capabilities).
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/usda-snap/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/usda-snap/refs/heads/main/apis.yml)
+**Areas:** SNAP · USDA · Food and Nutrition Administration · FNA · FNS · Retailer Locator · Open Data · ArcGIS · GIS · Government Data · Food Assistance
 
-## Tags
+## USDA SNAP Retailer Locator on APIs.io
 
-- SNAP
-- USDA
-- Food and Nutrition Administration
-- FNA
-- FNS
-- Retailer Locator
-- Open Data
-- ArcGIS
-- GIS
-- Government Data
-- Food Assistance
+Everything profiled for USDA SNAP Retailer Locator is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/usda-snap/](https://apis.io/providers/usda-snap/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+- [USDA SNAP Retailer Locator Retailers API](https://apis.io/apis/usda-snap/usda-snap-retailers-api/) — Query SNAP retailer location records.
+- [USDA SNAP Retailer Locator Service API](https://apis.io/apis/usda-snap/usda-snap-service-api/) — Feature service and layer metadata.
 
-## APIs
+### Published properties
 
-### SNAP Retailer Location Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public, anonymous, read-only Esri ArcGIS Feature Service exposing location records for every currently authorized SNAP retailer nationwide - store name, street address, city, state, zip/zip4, county, store type (e.g. Convenience Store, Grocery Store, Supermarket, Super Store, Farmers and Markets, Restaurant Meals Program, Specialty Store, Other), latitude and longitude, and Healthy Incentive Program / grantee participation. Supports SQL-style `where` filtering, field selection, spatial queries, sorting, distinct values, statistics, and offset-based pagination (maxRecordCount 1,000 rows per request) in JSON, GeoJSON, or PBF. This is the same live data source (ArcGIS item `8b260f9a10b0459aa441ad8588c2251c`) embedded in FNA's own public retailer locator web tool.
+#### Agentic access (1)
 
-- **Human URL:** [https://www.fna.usda.gov/snap/retailer-locator](https://www.fna.usda.gov/snap/retailer-locator)
-- **Base URL:** `https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Usda Snap Agentic Access](https://apis.io/agentic-access/usda-snap/usda-snap-agentic-access/)
 
-- Retailers
-- Locations
-- Geospatial
-- ArcGIS Feature Service
-- Open Data
+#### Collections (3)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Website](https://www.fna.usda.gov/snap/retailer-locator)
-- [Documentation](https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/)
-- [API Reference](https://www.arcgis.com/home/item.html?id=8b260f9a10b0459aa441ad8588c2251c)
-- [Documentation](https://usda-snap-retailers-usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-retailer-location-data/)
-- [OpenAPI](openapi/usda-snap-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/usda-snap.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/usda-snap.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [USDA SNAP Retailer Location Data API](https://apis.io/collections/usda-snap/open-usda-snap/)
+- [SNAP Retailer Location Data Retailers API](https://apis.io/collections/usda-snap/open-usda-snap-retailers-api/)
+- [SNAP Retailer Location Data Retailers Service API](https://apis.io/collections/usda-snap/open-usda-snap-service-api/)
 
-## Common Properties
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Usda Snap Domain Security](https://apis.io/security/usda-snap/usda-snap-domain-security/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Usda Snap Rate Limits](https://apis.io/rate-limits/usda-snap/usda-snap-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.fna.usda.gov/snap/retailer-locator)
 - [Documentation](https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/)
-- [Rate Limits](rate-limits/usda-snap-rate-limits.yml)
-- [Review](review.yml)
 
-## Plans and FinOps
+## API Evangelist rating
 
-Not applicable. This is free, public U.S. government open data with no pricing tiers, billing, or cost dimension - `plans/` and `finops/` are intentionally omitted rather than fabricated.
+**Kin Score 20.7** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 43.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 16.7 |
+| Access clarity | 0.0 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 17.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/usda-snap/](https://apis.io/providers/usda-snap/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for USDA SNAP Retailer Locator: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/usda-snap/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
